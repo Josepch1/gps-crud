@@ -59,8 +59,10 @@ public class PointOfInterestController {
 
       pointOfInterestService.save(newPOI);
 
+      var createdURI = URI.create("/v1/gps/%d".formatted(newPOI.getId()));
+
       return ResponseEntity
-              .created(URI.create("/v1/gps/" + newPOI.getId()))
+              .created(createdURI)
               .body(newPOI);
     } catch(Exception e) {
       return ResponseEntity.badRequest().body(e.getMessage());
